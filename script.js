@@ -62,13 +62,25 @@ for (const book of library.library) {
     booklistContainer.appendChild(newBookTile.div);
 }
 
+const newBookButton = document.querySelector(".new-book");
+const newBookDialog = document.querySelector(".new-book-dialog");
+const confirmBtn = document.querySelector("#confirmBtn");
+const titleInput = document.querySelector("#title");
 
-// const dialog = document.querySelector(".modal");
+newBookButton.addEventListener("click", () => {
+    newBookDialog.showModal();
+});
 
-// const btn = document.getElementById("new-book");
-// btn.addEventListener("click", () => {
-//     dialog.showModal();
-// });
+const output = document.querySelector("output");
 
+newBookDialog.addEventListener("close", () => {
+    output.value = 
+        newBookDialog.returnValue === "default"
+            ? "No return value."
+            : `Return value: ${newBookDialog.returnValue}`
+});
 
-// const closeButton = document.querySelector("dialog button");
+confirmBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    newBookDialog.close(titleInput.value);
+});

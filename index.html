@@ -11,5 +11,22 @@
     <div class="booklist-container">
         <button class="new-book book-div">NEW BOOK</button>
     </div>
+    <dialog class="new-book-dialog">
+        <form>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title">
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author">
+            <label for="pages">Pages:</label>
+            <input type="number" id="pages" name="pages">
+            <label for="read">Read:</label>
+            <input type="text" id="read" name="read">
+            <div class="dialog-close-buttons">
+                <button value="cancel" formmethod="dialog">Cancel</button>
+                <button value="default" id="confirmBtn">Submit</button>
+            </div>
+        </form>
+    </dialog>
+    <output></output>
 </body>
 </html>
