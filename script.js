@@ -46,41 +46,49 @@ function CreateBookTile(book) {
 // Create a library instance
 const library = new myLibrary();
 
-// Create books
-const book1 = new Book("1984", "George Orwell", 328, "Not read");
-const book2 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, "Read");
-const book3 = new Book("To Kill a Mockingbird", "Harper Lee", 281, "Read");
-
-// Add books to the library
-library.addBookToLibrary(book1);
-library.addBookToLibrary(book2);
-library.addBookToLibrary(book3);
-
+// Select booklist container to later add books
 const booklistContainer = document.querySelector(".booklist-container");
-for (const book of library.library) {
-    newBookTile = new CreateBookTile(book);
-    booklistContainer.appendChild(newBookTile.div);
-}
 
+
+// modal function variables
 const newBookButton = document.querySelector(".new-book");
 const newBookDialog = document.querySelector(".new-book-dialog");
 const confirmBtn = document.querySelector("#confirmBtn");
+
+// user input variables
 const titleInput = document.querySelector("#title");
+const authorInput = document.querySelector("#author");
+const pagesInput = document.querySelector("#pages");
+const readInput = document.querySelector("#read");
 
 newBookButton.addEventListener("click", () => {
     newBookDialog.showModal();
 });
 
-const output = document.querySelector("output");
-
+let i = 0;
 newBookDialog.addEventListener("close", () => {
-    output.value = 
-        newBookDialog.returnValue === "default"
-            ? "No return value."
-            : `Return value: ${newBookDialog.returnValue}`
+    if (!(newBookDialog.returnValue === "default")) {
+        library.addBookToLibrary(new Book(
+            userInput["title"],
+            userInput["author"],
+            userInput["pages"],
+            userInput["read"],
+        ));
+    }
+    const newBookTile = new CreateBookTile(library.library[i]);
+    booklistContainer.appendChild(newBookTile.div);
+    i += 1;
 });
 
+
+let userInput = {}
 confirmBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    newBookDialog.close(titleInput.value);
+    userInput = {
+        "title": titleInput.value,
+        "author": authorInput.value,
+        "pages": pagesInput.value,
+        "read": readInput.value
+    };
+    newBookDialog.close();
 });
